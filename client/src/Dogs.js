@@ -2,32 +2,40 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-class Dogs extends React.Component {
+class Dogs extends Component {
   constructor(props) {
-    super(props);
-    this.state = { dogs: null};
+    super(props)
+    this.state = { dogs: [] };
   }
 
   render() {
-    if(!(this.state.dogs)) { return <div>...loading!</div> }
+    const { dogs } = this.state;
+    if(!dogs) {
+      return <div>...loading!</div>
+    }
 
     return (
-      <div clasName="DogIndex" >
-        {dogs.map((dog) => this.renderDog(dog))}
+      <div className="DogIndex">
+       {dogs.map((dog) => this.renderDog(dog))}
       </div>
     );
   }
 
-  renderDog(dog) {
+   renderDog(dog) {
     return(
-      <li>{dog.doggie_username}</li>
-      {/* <Link to={`/dogs/${dog.doggie_username}`}>{dog.doggie_username}</Link> */}
-    );
-  }
+      <ul>
 
-  componentDidMount() {
-    axios.get('/api/dogs').then(res => {
-      this.setState({dog: res.data})
+        <li >{dog.doggie_id} {dog.doggie_username}</li>
+      </ul>
+      //{/* <Link to={`/dogs/${dog.doggie_username}`}>{dog.doggie_username}</Link> */}
+     );
+   }
+
+// fetch('/api/dogs').then(r => r.json()).then(console.log)
+
+  componentDidMount () {
+    axios.get('/api/dogs').then(res =>
+      {this.setState({ dogs: res.data })
     });
   }
 }

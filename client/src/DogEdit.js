@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class DogEdit extend Component {
+class DogEdit extend React.Component {
   constructor(props) {
     super(props);
     this.state = {dogName: null, dogOwner: null, dogAge: null}
   }
+  
   render() {
     const { dogName, dogOwner, dogAge } = this.state;
     return(

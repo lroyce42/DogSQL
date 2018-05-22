@@ -60,7 +60,18 @@ DoggieRouter.post('/:id/tricks', (req, res) => {
   }).catch((error) => {
     console.log(error);
     res.status(500).json({message: 'something 222 went wrong'})
-  })
-})
+  });
+});
+
+DoggieRouter.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const { dogName, dogOwner, dogAge } = req.body;
+  Dog.update(id, { dogName, dogOwner, dogAge }).then(dog => {
+    res.json(dog);
+  }).catch(event => {
+    console.log(event);
+    res.status(500).json({error: 'Something went wrong 10'});
+  });
+});
 
 module.exports = DoggieRouter;

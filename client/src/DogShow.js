@@ -13,19 +13,19 @@ class DogShow extends React.Component {
     return (
       <div className="oneDog">
         <ul>
-          <li>
-          {/* <li>{oneDog.doggie_username}</li>
+
+          <li>{oneDog.doggie_username}</li>
           <li>{oneDog.owner_name}</li>
           <li>{oneDog.age}</li>
-          <li>{oneDog.weight}</li> */}
-        </li>
+          <li>{oneDog.weight}</li>
+
         </ul>
       </div>
     );
   }
 
   componentDidMount() {
-    const id = this.props.match.id;
+    const {id} = this.props.match.params;
     axios.get(`/api/dogs/${id}`).then(res => {
       this.setState({oneDog: res.data})
     });

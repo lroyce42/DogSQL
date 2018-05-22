@@ -52,8 +52,14 @@ Dog.addTrick = (dogId, trickData) => {
   return db.one(`INSERT INTO tricks(doggie_id, tricks_name) VALUES($1,$2) RETURNING *`, [id, tricks_name])
 };
 
-
-
+Dog.update = (dogId, dogData) => {
+  const {id} = dogId,
+  { doggie_username, owner_name, age } = dogData;
+  return db.one(`UPDATE dogs
+    SET doggie_username=$1, owner_name=$2, age=$3
+    WHERE doggie_id=$5 RETURNING *`,
+    [doggie_username, owner_name, age, id])
+}
 
 
 module.exports = Dog;

@@ -15,7 +15,7 @@ class App extends Component {
           <ul className='nav-links'>
             <li> <Link to='/dogs'>Dogs</Link> </li>
             <li> <Link to='/dogs/:id'>Individual Dogs</Link> </li>
-            {/* <li> <Link to='/dogs/:id/edit'>Update the Dogs!</Link> </li>     */}
+            <li> <Link to='/dogs/:id/edit'>Update the Dogs!</Link> </li>    
 
           </ul>
           <Switch>

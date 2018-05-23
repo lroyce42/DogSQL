@@ -21,15 +21,14 @@ Dog.save = (dogData) => {
       VALUES($1,$2,$3,$4)
       RETURNING *`, [doggie_username, owner_name, age, weight])
 }
-//Update a dog
+// Update a dog
 Dog.findByIdAndUpdate = (dogId, dogData) => {
   const {doggie_username, owner_name, age, weight} = dogData,
         {id} = dogId;
 
   return db.one(`UPDATE dogs
-    SET doggie_username=$1, owner_name=$2, age=$3, weight=$4
-    WHERE doggie_id=$5 RETURNING *`,
-    [doggie_username, owner_name, age, weight, id])
+    SET doggie_username=${doggie_username}, owner_name=${owner_name}, age=${age}, weight=${weight}
+    WHERE doggie_id=${id} RETURNING *`)
 }
 //Delete a dog
 Dog.findByIdAndRemove = (dogId) => {
@@ -51,15 +50,14 @@ Dog.addTrick = (dogId, trickData) => {
   {tricks_name} = trickData;
   return db.one(`INSERT INTO tricks(doggie_id, tricks_name) VALUES($1,$2) RETURNING *`, [id, tricks_name])
 };
-
-Dog.update = (dogId, dogData) => {
-  const {id} = dogId,
-  { doggie_username, owner_name, age } = dogData;
-  return db.one(`UPDATE dogs
-    SET doggie_username=$1, owner_name=$2, age=$3
-    WHERE doggie_id=$5 RETURNING *`,
-    [doggie_username, owner_name, age, id])
-}
+//update the dog by id in the front end
+// Dog.update = (dogId, dogData) => {
+//   const { id } = parseInt(dogId);
+//   debugger;
+//   const { dogName, dogOwner, dogAge } = dogData;
+//   return db.one(`UPDATE dogs SET doggie_username=$1, owner_name=$2, age=$3 WHERE doggie_id=$4 RETURNING *`,
+//     [dogName, dogOwner, dogAge, id])
+// }
 
 
 module.exports = Dog;

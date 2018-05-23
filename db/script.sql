@@ -9,7 +9,7 @@ CREATE TABLE dogs(
   doggie_username varchar(255) unique NOT NULL,
   owner_name varchar(255) NOT NULL,
   age integer NOT NULL,
-  weight integer NOT NULL
+  weight integer  
 );
 
 INSERT INTO dogs(doggie_username, owner_name, age, weight)

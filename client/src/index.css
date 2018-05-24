@@ -14,3 +14,22 @@ body {
   padding: 10px;
   width: 500px;
 }
+.DogIndex {
+  position: absolute;
+  left: 10px;
+}
+.App {
+  position: absolute;
+  left: 10px;
+}
+#newDogAdd {
+  position: absolute;
+  left: 400px;
+  top: 0px;
+  border: 2px solid black;
+  width: 200px;
+  padding: 10px;
+}
+#individualDog {
+  border: 1px solid black;
+}

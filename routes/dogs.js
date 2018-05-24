@@ -33,6 +33,7 @@ DoggieRouter.put('/:id', (req, res) => {
   Dog.findByIdAndUpdate(req.params, req.body).then((dog) => {
       res.json(dog);
     }).catch((error) => {
+      console.log(error)
       res.status(500).json({message: 'Something Went Wrong 4U'});
     });
 });
@@ -75,5 +76,33 @@ DoggieRouter.post('/:id/tricks', (req, res) => {
 //   });
 // });
 
+DoggieRouter.get('/:dogid/tricks/:trickid', (req, res) => {
+  Dog.findOneTrick(req.params).then((trick) => {
+    res.json(trick);
+  }).catch((error) => {
+    console.log(error);
+    res.status(500).json({message: "something went wrong 8"});
+  });
+});
+
+DoggieRouter.put('/:dogid/tricks/:trickid', (req, res) => {
+  Dog.findOneTrickAndUpdate(req.params, req.body)
+  .then((updatedTrick) => {
+    res.json(updatedTrick);
+  }).catch((error) => {
+    console.log(error);
+    res.status(500).json({message: 'Something Went Wrong 9'});
+  });
+});
+
+DoggieRouter.delete('/:dogid/tricks/:trickid', (req, res) => {
+  Dog.findTrickByIdAndRemove(req.params)
+  .then((trickRemoved) => {
+    res.json(trickRemoved);
+  }).catch((error) => {
+    console.log(error);
+    res.status(500).json({message: 'Something went wrong 10'});
+  });
+});
 
 module.exports = DoggieRouter;

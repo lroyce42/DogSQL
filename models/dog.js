@@ -8,7 +8,8 @@ Dog.find = () => {
 };
 //Find dog by id
 Dog.findById = (dogId) => {
-  let {id} = dogId;
+  let { id } = dogId;
+  debugger;
   return db.one(`SELECT *
     FROM dogs
     WHERE doggie_id=$1`, id)
@@ -21,15 +22,17 @@ Dog.save = (dogData) => {
       VALUES($1,$2,$3,$4)
       RETURNING *`, [doggie_username, owner_name, age, weight])
 }
+
 // Update a dog
 Dog.findByIdAndUpdate = (dogId, dogData) => {
   const {doggie_username, owner_name, age, weight} = dogData,
         {id} = dogId;
 
   return db.one(`UPDATE dogs
-    SET doggie_username=${doggie_username}, owner_name=${owner_name}, age=${age}, weight=${weight}
-    WHERE doggie_id=${id} RETURNING *`)
+    SET doggie_username=$1, owner_name=$2, age=$3, weight=$4
+    WHERE doggie_id=$5 RETURNING *`, [doggie_username, owner_name, age, weight, id])
 }
+
 //Delete a dog
 Dog.findByIdAndRemove = (dogId) => {
   const {id} = dogId;
@@ -58,6 +61,29 @@ Dog.addTrick = (dogId, trickData) => {
 //   return db.one(`UPDATE dogs SET doggie_username=$1, owner_name=$2, age=$3 WHERE doggie_id=$4 RETURNING *`,
 //     [dogName, dogOwner, dogAge, id])
 // }
+//Get a single trick
+Dog.findOneTrick = (paramsData) => {
+  const { dogid, trickid } = paramsData;
+  return db.one(`SELECT *
+    FROM tricks
+    WHERE trick_id=$1 AND doggie_id=$2`, [trickid, dogid])
+};
 
+Dog.findOneTrickAndUpdate = (paramsData, trickData) => {
+  const { dogid, trickid } = paramsData,
+    { tricks_name } =trickData;
+    return db.one(`UPDATE tricks
+      SET tricks_name=$1
+      WHERE trick_id=$2 AND doggie_id=$3
+      RETURNING *`,
+      [tricks_name, trickid, dogid])
+};
+
+Dog.findTrickByIdAndRemove = (paramsData) => {
+  const { dogid, trickid } = paramsData;
+  return db.one(`DELETE FROM tricks
+    WHERE trick_id=$1
+    AND doggie_id=$2 RETURNING *`, [trickid, dogid]);
+}
 
 module.exports = Dog;

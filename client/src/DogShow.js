@@ -27,8 +27,7 @@ class DogShow extends React.Component {
            <Link to={`/dogs/${oneDog.doggie_id}/edit`}>
           Update the Dog </Link>
         <br/>
-           <Link to={`/dogs/${oneDog.doggie_id}/edit`}>
-          Delete the Dog </Link>
+
         </ul>
       </div>
     );

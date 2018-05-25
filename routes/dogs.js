@@ -64,18 +64,6 @@ DoggieRouter.post('/:id/tricks', (req, res) => {
   });
 });
 
-// DoggieRouter.put('/:id/edit', (req, res) => {
-//   const { id } = req.params;
-//   const { dogName, dogOwner, dogAge } = req.body;
-//   debugger;
-//   Dog.update(id, { dogName, dogOwner, dogAge }).then(dog => {
-//     res.json(dog);
-//   }).catch(event => {
-//     console.log(event);
-//     res.status(500).json({error: 'Something went wrong 10'});
-//   });
-// });
-
 DoggieRouter.get('/:dogid/tricks/:trickid', (req, res) => {
   Dog.findOneTrick(req.params).then((trick) => {
     res.json(trick);

@@ -53,14 +53,7 @@ Dog.addTrick = (dogId, trickData) => {
   {tricks_name} = trickData;
   return db.one(`INSERT INTO tricks(doggie_id, tricks_name) VALUES($1,$2) RETURNING *`, [id, tricks_name])
 };
-//update the dog by id in the front end
-// Dog.update = (dogId, dogData) => {
-//   const { id } = parseInt(dogId);
-//   debugger;
-//   const { dogName, dogOwner, dogAge } = dogData;
-//   return db.one(`UPDATE dogs SET doggie_username=$1, owner_name=$2, age=$3 WHERE doggie_id=$4 RETURNING *`,
-//     [dogName, dogOwner, dogAge, id])
-// }
+
 //Get a single trick
 Dog.findOneTrick = (paramsData) => {
   const { dogid, trickid } = paramsData;

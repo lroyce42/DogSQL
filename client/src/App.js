@@ -3,7 +3,6 @@ import './App.css';
 import Dogs from './Dogs.js'
 import DogShow from './DogShow.js'
 import DogEdit from './DogEdit.js'
-import DogChat from './DogChat.js'
 import Home from './Home.js'
 import { BrowserRouter as Router, Link, Redirect, Route, NavLink, Switch } from 'react-router-dom';
 
@@ -16,12 +15,13 @@ class App extends Component {
           <ul className='nav-links'>
             <li> <NavLink to='/dogs'>Dogs</NavLink> </li>
             <li> <Link to='/dogs/chat'>Chat about Dogs!</Link> </li>
-
           </ul>
           <Switch>
             <Route exact path='/home' component={Home} />
             <Route exact path='/dogs' component={Dogs} />
-            <Route exact path='/dogs/chat' component={DogChat} />
+            <Route exact path='/dogs/chat' component={SimpleDogChat} />
+            <Route exact path='/dogs/chat/more' component={DogChat} />
+
             <Route exact path='/dogs/:id' component={DogShow} />
             <Route exact path='/dogs/:id/edit' component={DogEdit} />
             <Redirect exact from='/' to='/home'/>

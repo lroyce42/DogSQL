@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import io from 'socket.io-client';
-const socket = io();
+import socket from './socket.js'
 
 class DogChat extends Component {
   constructor (props) {
     super(props);
-    this.state = { Laura: [], otherUsers: [], currentThing: '' };
+    this.state = { yourDogChat: [], othersDogChat: [], currentThing: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render () {
-    const { Laura, otherUsers, currentThing } = this.state;
+    const { yourDogChat, othersDogChat, currentThing } = this.state;
 
     return (
       <div className="DogChat">
@@ -23,12 +22,12 @@ class DogChat extends Component {
 
         <h4>Dog Chat</h4>
         <ul>
-          {Laura.map((LauraChatItem, i) => <li key={i}>{LauraChatItem}</li>)}
+          {yourDogChat.map((yourDogChatChatItem, i) => <li key={i}>{yourDogChatChatItem}</li>)}
         </ul>
 
         <h4>Others' things</h4>
         <ul>
-          {otherUsers.map((thing, i) => <li key={i}>{thing}</li>)}
+          {othersDogChat.map((thing, i) => <li key={i}>{thing}</li>)}
         </ul>
       </div>
     );
@@ -40,14 +39,14 @@ class DogChat extends Component {
   handleSubmit () {
     const { currentThing } = this.state;
     this.setState(prev => {
-      return { Laura: prev.Laura.concat(currentThing) }
+      return { yourDogChat: prev.yourDogChat.concat(currentThing) }
     });
     socket.emit('send-thing', currentThing);
   }
   componentDidMount () {
     socket.on('get-thing', thing => {
       this.setState(prev => {
-        return { otherUsers: prev.otherUsers.concat(thing) }
+        return { othersDogChat: prev.othersDogChat.concat(thing) }
       });
     });
   }

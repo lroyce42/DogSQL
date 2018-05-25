@@ -49,7 +49,8 @@ Dog.findAllTricks = (dogId) => {
   return db.query(
       `SELECT * FROM tricks
       WHERE doggie_id=${id}`);
-}
+};
+
 //Create a trick for a dog by id
 Dog.addTrick = (dogId, trickData) => {
   const {id} = dogId,

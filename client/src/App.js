@@ -16,7 +16,7 @@ class App extends Component {
             <li> <NavLink to='/dogs'>Dogs</NavLink> </li>
           </ul>
           <Switch>
-            <Route exact path='/home' component={Dogs} />
+            {/* <Route exact path='/home' component={Dogs} /> */}
             <Route exact path='/dogs' component={Dogs} />
             <Route exact path='/dogs/:id' component={DogShow} />
             <Route exact path='/dogs/:id/edit' component={DogEdit} />

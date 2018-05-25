@@ -6,6 +6,7 @@ const db = require('.././db/config'),
 Dog.find = () => {
   return db.query(`SELECT * FROM dogs`)
 };
+
 //Find dog by id
 Dog.findById = (dogId) => {
   let { id } = dogId;
@@ -14,6 +15,7 @@ Dog.findById = (dogId) => {
     FROM dogs
     WHERE doggie_id=$1`, id)
 };
+
 //Create a dog
 Dog.save = (dogData) => {
   const {doggie_username, owner_name, age, weight} = dogData;
@@ -21,7 +23,7 @@ Dog.save = (dogData) => {
     (doggie_username, owner_name, age, weight)
       VALUES($1,$2,$3,$4)
       RETURNING *`, [doggie_username, owner_name, age, weight])
-}
+};
 
 // Update a dog
 Dog.findByIdAndUpdate = (dogId, dogData) => {
@@ -46,13 +48,15 @@ Dog.findAllTricks = (dogId) => {
   return db.query(
       `SELECT * FROM tricks
       WHERE doggie_id=${id}`);
-}
+};
+
 //Create a trick for a dog by id
 Dog.addTrick = (dogId, trickData) => {
   const {id} = dogId,
   {tricks_name} = trickData;
   return db.one(`INSERT INTO tricks(doggie_id, tricks_name) VALUES($1,$2) RETURNING *`, [id, tricks_name])
 };
+
 //Get a single trick
 Dog.findOneTrick = (paramsData) => {
   const { dogid, trickid } = paramsData;

@@ -14,14 +14,10 @@ class App extends Component {
           <p>A list of <b>awesome</b> dogs</p>
           <ul className='nav-links'>
             <li> <NavLink to='/dogs'>Dogs</NavLink> </li>
-            <li> <Link to='/dogs/chat'>Chat about Dogs!</Link> </li>
           </ul>
           <Switch>
-            <Route exact path='/home' component={Home} />
+            <Route exact path='/home' component={Dogs} />
             <Route exact path='/dogs' component={Dogs} />
-            <Route exact path='/dogs/chat' component={SimpleDogChat} />
-            <Route exact path='/dogs/chat/more' component={DogChat} />
-
             <Route exact path='/dogs/:id' component={DogShow} />
             <Route exact path='/dogs/:id/edit' component={DogEdit} />
             <Redirect exact from='/' to='/home'/>

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 class Dogs extends Component {
   constructor(props) {
     super(props)
-    // this.state = { dogs: [] };
     this.state = {dogs: [], doggie_username: '', owner_name: '', age: '', weight: ''}
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,7 +53,6 @@ class Dogs extends Component {
    }
 
    handleSubmit () {
-     // const { id } = this.props.match.params;
      const { doggie_username, owner_name, age, weight } = this.state;
      axios.post('/dogs', { doggie_username, owner_name, age, weight }).then(res => {
        this.props.history.push(`/dogs/`); // send client back to dog show
@@ -64,14 +62,7 @@ class Dogs extends Component {
        alert('Check warning');
      });
    }
-   // componentDidMount () {
-   //   const { id } = this.props.match.params;
-   //   axios.get(`/dogs/`).then(res => {
-   //     const { dogName, dogOwner, dogAge, dogWeight } = res.data;
-   //     this.setState({ dogName, dogOwner, dogAge, dogWeight });
-   //   });
-   //   debugger;
-   // }
+
    componentDidMount () {
      axios.get('/api/dogs').then(res =>
        {this.setState({ dogs: res.data })

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
@@ -10,8 +10,6 @@ class DogShow extends React.Component {
   }
   render () {
     const { oneDog, dogProps } = this.state;
-    const { id } = dogProps;
-    const { url } = `/dogs/${id}/edit`;
     if(!oneDog) { return <div className="oneDog">...loading</div> }
 
     return (
@@ -27,8 +25,8 @@ class DogShow extends React.Component {
            <Link to={`/dogs/${oneDog.doggie_id}/edit`}>
           Update the Dog </Link>
         <br/>
-           <Link to={`/dogs/${oneDog.doggie_id}/edit`}>
-          Delete the Dog </Link>
+           {/* <Link to={`/dogs/${oneDog.doggie_id}/edit`}>
+          Delete the Dog </Link> */}
         </ul>
       </div>
     );
